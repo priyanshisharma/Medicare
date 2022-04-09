@@ -8,6 +8,7 @@ import android.view.Menu;
 
 import com.example.android.ui.home.HomeFragment;
 import com.example.android.ui.slideshow.SlideshowFragment;
+import com.example.android.ui.tracker.PeriodTrackerFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -27,7 +28,8 @@ public class PatientHomeActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private HomeFragment home;
-    private SlideshowFragment slide = new SlideshowFragment();
+    //private SlideshowFragment slide = new SlideshowFragment();
+    private PeriodTrackerFragment period = new PeriodTrackerFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,7 @@ public class PatientHomeActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_periodTracker)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

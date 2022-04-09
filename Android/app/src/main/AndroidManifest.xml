@@ -6,13 +6,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/medlogo"
+        android:icon="@drawable/squarelogo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/medlogo"
+        android:roundIcon="@drawable/squarelogo"
         android:supportsRtl="true"
         android:theme="@style/Theme.Android">
         <activity android:name=".CancerDetectActivity" />
-        <activity android:name=".PeriodTrackerActivity" />
         <activity android:name=".CallsActivity"
             android:theme="@style/Theme.Android.NoActionBar"/>
         <activity android:name=".ChatListActivity"
