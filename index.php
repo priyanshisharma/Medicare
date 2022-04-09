@@ -33,7 +33,7 @@
             <div class="navbar-brand">
                 <span class="navbar-logo">
                     <a href="index.php">
-                        <img src="assets/images/aarogya_logo.png" alt="Mobirise" style="height: 5rem;">
+                        <img src="assets/images/medicare_hack4bengal.png" alt="Mobirise" style="height: 5rem;">
                     </a>
                 </span>
             </div>
@@ -77,7 +77,7 @@
         <div class="row justify-content-end">
             <div class="col-12 col-lg-5">
                 <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1">
-                    <strong style="font-family: 'Dancing Script', cursive;">Aarogya</strong>
+                    <strong style="font-family: 'Dancing Script', cursive;">Medicare</strong>
                 </h1>
                 <p class="mbr-text mbr-fonts-style display-7">
                     Complete Mental and Physical Well-being Solution.
