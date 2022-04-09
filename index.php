@@ -9,7 +9,7 @@
     <meta name="description" content="">
     
     
-    <title>Aarogya</title>
+    <title>Medicare</title>
     <link rel="stylesheet" href="styles/homepage.css">
     <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
     <link rel="stylesheet" href="assets/tether/tether.min.css">
