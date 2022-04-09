@@ -2,6 +2,7 @@ package com.example.android;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -49,11 +50,38 @@ public class CallsActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_calls);
         setUpBottomNavigationViewForDoctor();
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         currUserRole = "doctor";
 
         callList = findViewById(R.id.callList);
         initCallList();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.patient_home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        signoutCurrUser();
+        return(super.onOptionsItemSelected(item));
+    }
+
+    private void signoutCurrUser() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        if(user!=null){
+            getSharedPreferences("role",MODE_PRIVATE).edit().clear().commit();
+            Intent intent = new Intent(CallsActivity.this,LoginActivity.class);
+            auth.signOut();
+            startActivity(intent);
+            finish();
+        }
     }
 
     /*private void startmeet(String code){

@@ -13,8 +13,10 @@
         android:theme="@style/Theme.Android">
         <activity android:name=".CancerDetectActivity" />
         <activity android:name=".PeriodTrackerActivity" />
-        <activity android:name=".CallsActivity" />
-        <activity android:name=".ChatListActivity" />
+        <activity android:name=".CallsActivity"
+            android:theme="@style/Theme.Android.NoActionBar"/>
+        <activity android:name=".ChatListActivity"
+            android:theme="@style/Theme.Android.NoActionBar"/>
         <activity android:name=".ChatActivity" />
         <activity android:name=".NewDoctorSearchActivity" />
         <activity

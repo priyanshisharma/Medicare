@@ -2,6 +2,7 @@ package com.example.android;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -44,10 +45,37 @@ public class ChatListActivity extends AppCompatActivity {
         prefs = getSharedPreferences("role",MODE_PRIVATE);
         currUserRole = prefs.getString("userRole","");
         setContentView(R.layout.activity_chat_list);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         setUpBottomNavigationViewForDoctor();
         currUserRole = "doctor";
         chatList = findViewById(R.id.chatList);
         initPrevChats();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.patient_home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        signoutCurrUser();
+        return(super.onOptionsItemSelected(item));
+    }
+
+    private void signoutCurrUser() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        if(user!=null){
+            getSharedPreferences("role",MODE_PRIVATE).edit().clear().commit();
+            Intent intent = new Intent(ChatListActivity.this,LoginActivity.class);
+            auth.signOut();
+            startActivity(intent);
+            finish();
+        }
     }
 
     private void setUpBottomNavigationViewForDoctor() {
