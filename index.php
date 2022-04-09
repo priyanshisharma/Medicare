@@ -111,7 +111,7 @@
                     </p>
                     <br/>
                     <p class="mbr-text mbr-fonts-style display-7">
-                        Aarogya is a comprehensive Medical Consultation System which is available both in web and android versions. May it be a pandemic or 
+                        Medicure is a comprehensive Medical Consultation System which is available both in web and android versions. May it be a pandemic or 
                         the problem of distance. We strive to may the necessary help accessible.
                     </p>
                 </div>
@@ -250,7 +250,7 @@
             <div class="row social-row">
                 <div class="social-list align-right pb-2">
                     <div class="soc-item">
-                        <a href="https://github.com/ShrutiRawal/HackInTheNorth" target="_blank">
+                        <a href="https://github.com/priyanshisharma/Medicare" target="_blank">
                             <span class="mbr-iconfont mbr-iconfont-social socicon-github socicon"></span>
                         </a>
                     </div>
