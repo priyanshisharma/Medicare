@@ -1,39 +1,42 @@
-package com.example.android;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.android.ui.tracker;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.android.R;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
-import com.google.android.material.timepicker.MaterialTimePicker;
-import com.google.android.material.timepicker.TimeFormat;
-
-import org.jetbrains.annotations.TestOnly;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
-public class PeriodTrackerActivity extends AppCompatActivity {
+public class PeriodTrackerFragment extends Fragment {
 
+    private PeriodTrackerViewModel periodTrackerViewModel;
     Button startDate, endDate,go;
     TextView results;
     static int m2, d2;
+    AutoCompleteTextView customerAutoTV;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_period_tracker);
-        startDate = findViewById(R.id.startDate);
-        endDate = findViewById(R.id.endDate);
-        go = findViewById(R.id.go);
-        results = findViewById(R.id.results);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        periodTrackerViewModel = new ViewModelProvider(this).get(PeriodTrackerViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_period_tracker, container, false);
+
+        customerAutoTV = root.findViewById(R.id.customerTextView);
+        startDate = root.findViewById(R.id.startDate);
+        endDate = root.findViewById(R.id.endDate);
+        go = root.findViewById(R.id.go);
+        results = root.findViewById(R.id.results);
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,6 +51,8 @@ public class PeriodTrackerActivity extends AppCompatActivity {
         });
         initialiseSpinner();
         initDates();
+
+        return root;
     }
 
     static boolean isLeap(int y)
@@ -215,7 +220,7 @@ public class PeriodTrackerActivity extends AppCompatActivity {
         startDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sdPicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
+                sdPicker.show(getParentFragmentManager()  , "MATERIAL_DATE_PICKER");
             }
         });
         sdPicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
@@ -231,7 +236,7 @@ public class PeriodTrackerActivity extends AppCompatActivity {
         endDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edPicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
+                edPicker.show(getParentFragmentManager()  , "MATERIAL_DATE_PICKER");
             }
         });
         edPicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
@@ -244,15 +249,10 @@ public class PeriodTrackerActivity extends AppCompatActivity {
 
     private void initialiseSpinner() {
 
-        final AutoCompleteTextView customerAutoTV = findViewById(R.id.customerTextView);
-
-        // create list of customer
         ArrayList<String> customerList = getMonthList();
 
-        //Create adapter
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(PeriodTrackerActivity.this, android.R.layout.simple_spinner_item, customerList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, customerList);
 
-        //Set adapter
         customerAutoTV.setAdapter(adapter);
 
     }
@@ -273,4 +273,5 @@ public class PeriodTrackerActivity extends AppCompatActivity {
         customers.add("December");
         return customers;
     }
+
 }
