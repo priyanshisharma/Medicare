@@ -1,12 +1,27 @@
 <?php
     require_once("./config.php");
     session_start();
-    
-    $pid = $_SESSION['id'];
-    $query= "SELECT * FROM prescription WHERE patientId='$pid'";
-    
+    $pid = $_GET['id'];
+    $did = $_SESSION['id'];
+    $query= "SELECT * FROM users WHERE userid='$pid'";
+    $res = $con->query($query);
+    $row= $res->fetch_array();
 
-   
+    $name= $row['username'];
+    if(isset($_POST['submit'])){
+        $title = $_POST['title'];
+        $prescription = $_POST['prescription'];
+        $presid = uniqid($pid,$title);
+        $query = "INSERT INTO prescription VALUES('$presid','$did','$pid','$title','$prescription')";
+        $result = $con->query($query);
+        if($result){
+            echo "<h3 style='color:green'>Successfully added</h3>";
+            header ("location: ./patientList.php ");
+        }
+        else{
+            echo "<h3 style='color:red'>Oops there was an error!!!!</h3>";
+        }
+    }
     
 ?>
 <!DOCTYPE html>
@@ -20,7 +35,7 @@
     <meta name="description" content="">
     
     
-    <title>Patient Dashboard</title>
+    <title>Doctor Dashboard</title>
     <link rel="stylesheet" href="styles/patientDashboard.css">
     <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
     <link rel="stylesheet" href="assets/tether/tether.min.css">
@@ -35,7 +50,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
  </head>
-<body>
+<body style="background : rgba(0,0,0,0.7);">
   
   <section class="menu cid-s48OLK6784" once="menu" id="menu1-h">
     
@@ -77,7 +92,7 @@
 
    </section>
 
-<section class="info3 cid-smHa3xqxC6 mbr-parallax-background" id="info3-r" style="margin-top:30px;">
+<section class="info3 cid-smHa3xqxC6 mbr-parallax-background" id="info3-r" style="margin-top:30px; ">
 <div class="mbr-overlay" style="opacity: 0.6; background-color: rgb(255, 177, 138);">
     </div>
     <div class="container">
@@ -85,7 +100,7 @@
             <div class="card col-12 col-lg-10">
                 <div class="card-wrapper">
                     <div class="card-box align-center">
-                        <h4 class="card-title mbr-fonts-style align-center mb-4 display-1"><strong style="font-family: 'Dancing Script', cursive;">Patient Dashboard</strong></h4>
+                        <h4 class="card-title mbr-fonts-style align-center mb-4 display-1"><strong style="font-family: 'Dancing Script', cursive;">Doctor Dashboard</strong></h4>
                     </div>
                 </div>
             </div>
@@ -94,74 +109,61 @@
 </section>
 
    <section id="patient-dashboard" >
-        <div id="sub-card">
-            <div class="dashboard-card">
-                <div class="dashboard-card-head">
-                    Lab Reports
-                </div>
-                <div class="report-list">
-                    Mammogram Report-17/2/22
-                </div> 
-                <div class="report-list">
-                    Blood-test Report-20/12/21
-                </div> 
-            </div>
-            <div class="dashboard-card">
-                <div class="dashboard-card-head">
-                   Appointment History
-                </div>
-                <div class="report-list">
-                    General Checkup on 2/02/22
-                </div> 
-                <div class="report-list">
-                    Consultancy with Dr. Naina Singh on 25/02/22
-                </div> 
-                <div class="report-list">
-                    Video consultancy on 10/12/21
-                </div> 
-            </div>
-            </div>
-
-                <div class="dashboard-main-card">
+            <div class="dashboard-main-card">
                     <div class="dashboard-card-head">
-                        Doctor Consultation
+                        Patient History
                     </div>
                     <div id="doctor-details">
                         <div style="display:flex"> 
-                            <div style="color:#ff6666;font-weight:500;margin-right:10px">Doctor Name: </div>
-                            <div> Dr. Shushmita Agrawal</div>
+                            <div style="color:#ff6666;font-weight:500;margin-right:10px">Patient Name: </div>
+                            <?php
+                           
+                          
+                             echo "<div>$name</div>";
+                            ?>
                         </div>
                         <div style="display:flex">
                             <div style="color:#ff6666;font-weight:500;margin-right:10px">Hospital Name: </div>
                             <div> Ram Narayan Hospital, G.E. Road, Raipur</div>
                         </div>
                     </div>
-                    <?php
-                    $query = "SELECT * FROM prescription WHERE patientId='$pid'";
-                    $res = $con->query($query);
-                    if($res){
-                        while($row=$res->fetch_array()){
-                            $title = $row['title'];
-                            $prescription = $row['prescription'];
-                            
-                            echo "
-                            <div class='prescription'>
-                            <div>
-                            <h2 style='color:#ff6666'>$title</h2>
-                            </div>
-                            $prescription
-                             </div>
-                            ";
-                        }
-            
-                    }
-                    else{
-                        echo "nahi aaya";
-                    }
-                    ?>
-                   
+                    
+                        <?php
+                        
+                        $query = "SELECT * FROM prescription WHERE patientId='$pid'";
+            $result = $con->query($query);
+            if($result){
+                while($row=$result->fetch_array()){
+                    $title = $row['title'];
+                    $prescription = $row['prescription'];
+                    
+                    echo "
+                    <div class='prescription'>
+                    <div>
+                    <h2 style='color:#ff6666'>$title</h2>
+                    </div>
+                    $prescription
+                     </div>
+                    ";
+                }
+    
+            }
+            else{
+                echo "nahi aaya";
+            }
+                        ?>
+                </div>
             </div>
    </section>
+   <form id="patient-dashboard" style="display:block;" method="post">
+            <div class="dashboard-main-card" style="display:block">
+                <h2 style="font-weight:800; margin-top:30px;">Add Prescription</h2>
+                <input placeholder="Prescription Title" id="prescription-title-input" name="title" />
+                <textarea placeholder="Add Prescription" id="prescription-input" type="text" name="prescription" rows="5"></textarea>
+                <br/>
+                <center><button type="submit" class="btn btn-danger" name="submit">Add Prescription</button></center>
+            </div>
+   </form>
 
    
    <section class="footer3 cid-s48P1Icc8J" once="footers" id="footer3-i"><div class="container">

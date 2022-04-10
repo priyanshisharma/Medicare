@@ -155,7 +155,7 @@
             <div class="row social-row">
                 <div class="social-list align-right pb-2">
                     <div class="soc-item">
-                        <a href="https://github.com/ShrutiRawal/HackInTheNorth" target="_blank">
+                        <a href="https://github.com/priyanshisharma/Medicare" target="_blank">
                             <span class="mbr-iconfont mbr-iconfont-social socicon-github socicon"></span>
                         </a>
                     </div>

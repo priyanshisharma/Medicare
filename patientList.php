@@ -1,17 +1,7 @@
-<?php
-    require_once("./config.php");
-    session_start();
-    
-    $pid = $_SESSION['id'];
-    $query= "SELECT * FROM prescription WHERE patientId='$pid'";
-    
-
-   
-    
-?>
 <!DOCTYPE html>
-<html  >
-  <head>
+<html lang="en">
+<head>
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="generator" content="Mobirise v5.2.0, mobirise.com">
@@ -20,8 +10,8 @@
     <meta name="description" content="">
     
     
-    <title>Patient Dashboard</title>
-    <link rel="stylesheet" href="styles/patientDashboard.css">
+    <title>Patient List</title>
+    <link rel="stylesheet" href="styles/patientList.css">
     <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
     <link rel="stylesheet" href="assets/tether/tether.min.css">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
@@ -35,9 +25,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
  </head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient List</title>
+</head>
 <body>
-  
-  <section class="menu cid-s48OLK6784" once="menu" id="menu1-h">
+<section class="menu cid-s48OLK6784" once="menu" id="menu1-h">
     
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         <div class="container-fluid">
@@ -76,95 +69,52 @@
     </nav>
 
    </section>
-
-<section class="info3 cid-smHa3xqxC6 mbr-parallax-background" id="info3-r" style="margin-top:30px;">
-<div class="mbr-overlay" style="opacity: 0.6; background-color: rgb(255, 177, 138);">
+   
+   <div id="patient-list-wrapper">
+    <div id="patient-list-wrapper-img">
+        <img src="assets/images/doctorlist.png"/>
     </div>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="card col-12 col-lg-10">
-                <div class="card-wrapper">
-                    <div class="card-box align-center">
-                        <h4 class="card-title mbr-fonts-style align-center mb-4 display-1"><strong style="font-family: 'Dancing Script', cursive;">Patient Dashboard</strong></h4>
-                    </div>
-                </div>
-            </div>
+    <div id="patient-list-lists">
+    <table>
+        <!-- <thead>
+            <tr>Patient Name</tr>
+            <tr>Hospital</tr>
+            <tr></tr>
+        </thead> -->
+        <?php
+            // session_start();
+            echo "<br>";
+            require_once("./config.php");
+            $occ = "patient";
+            $query = "SELECT * FROM users WHERE occupation='$occ'";
+            $result = $con->query($query);
+            if($result){
+                while($row=$result->fetch_array()){
+                    $name = $row['username'];
+                    $id = $row['userid'];
+                    $hospital ="Ram Narayan Hospital, G.E. Road, Raipur";
+                    echo "
+                    <center><div class='patient-list-item'>
+                             <center><div>
+                             <a href='./doctorDashboard.php?id=".$row['userid']."'><h2 style='text-transform:uppercase; color:#ff6666'>$name</h2></a>
+                            </div>
+                            </center>
+                            <center><div>$hospital</div></center>
+                            
+                       
+                        </div></center>
+                    ";
+                }
+    
+            }
+            else{
+                echo "nahi aaya";
+            }
+        ?>
+        </table>
         </div>
     </div>
-</section>
-
-   <section id="patient-dashboard" >
-        <div id="sub-card">
-            <div class="dashboard-card">
-                <div class="dashboard-card-head">
-                    Lab Reports
-                </div>
-                <div class="report-list">
-                    Mammogram Report-17/2/22
-                </div> 
-                <div class="report-list">
-                    Blood-test Report-20/12/21
-                </div> 
-            </div>
-            <div class="dashboard-card">
-                <div class="dashboard-card-head">
-                   Appointment History
-                </div>
-                <div class="report-list">
-                    General Checkup on 2/02/22
-                </div> 
-                <div class="report-list">
-                    Consultancy with Dr. Naina Singh on 25/02/22
-                </div> 
-                <div class="report-list">
-                    Video consultancy on 10/12/21
-                </div> 
-            </div>
-            </div>
-
-                <div class="dashboard-main-card">
-                    <div class="dashboard-card-head">
-                        Doctor Consultation
-                    </div>
-                    <div id="doctor-details">
-                        <div style="display:flex"> 
-                            <div style="color:#ff6666;font-weight:500;margin-right:10px">Doctor Name: </div>
-                            <div> Dr. Shushmita Agrawal</div>
-                        </div>
-                        <div style="display:flex">
-                            <div style="color:#ff6666;font-weight:500;margin-right:10px">Hospital Name: </div>
-                            <div> Ram Narayan Hospital, G.E. Road, Raipur</div>
-                        </div>
-                    </div>
-                    <?php
-                    $query = "SELECT * FROM prescription WHERE patientId='$pid'";
-                    $res = $con->query($query);
-                    if($res){
-                        while($row=$res->fetch_array()){
-                            $title = $row['title'];
-                            $prescription = $row['prescription'];
-                            
-                            echo "
-                            <div class='prescription'>
-                            <div>
-                            <h2 style='color:#ff6666'>$title</h2>
-                            </div>
-                            $prescription
-                             </div>
-                            ";
-                        }
-            
-                    }
-                    else{
-                        echo "nahi aaya";
-                    }
-                    ?>
-                   
-            </div>
-   </section>
-
-   
-   <section class="footer3 cid-s48P1Icc8J" once="footers" id="footer3-i"><div class="container">
+<section class="footer3 cid-s48P1Icc8J" once="footers" id="footer3-i"><div class="container">
         <div class="media-container-row align-center mbr-white">
             
             <div class="row social-row">
@@ -177,7 +127,7 @@
                 </div>
             </div>
             <div class="row row-copirayt">
-                <p class="mbr-text mb-0 mbr-fonts-style mbr-white align-center display-7">Made by Team TechBlitz&nbsp;</p>
+                <p class="mbr-text mb-0 mbr-fonts-style mbr-white align-center display-7">Made by Team HackDivas&nbsp;</p>
             </div>
         </div>
     </div>
