@@ -7,6 +7,9 @@ import java.io.Serializable;
 
 public class AuthResponseCancer implements Serializable {
 
+    String pos = "Positive";
+    String neg = "Negative";
+
     @SerializedName("Hinselmann")
     @Expose
     int Hinselmann;
@@ -56,5 +59,34 @@ public class AuthResponseCancer implements Serializable {
     }
 
 
+    public String hinsel(){
+        if(getHinselmann()==1){
+            return pos;
+        }else{
+            return neg;
+        }
+    }
+
+    public String cytol(){
+        if(getCytology()==1){
+            return pos;
+        }else{
+            return neg;
+        }
+    }
+    public String biopsyReq(){
+        if(getBiopsy()==1){
+            return pos;
+        }else{
+            return neg;
+        }
+    }
+    public String schill(){
+        if(getSchiller()==1){
+            return pos;
+        }else{
+            return neg;
+        }
+    }
 
 }

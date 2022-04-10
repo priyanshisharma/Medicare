@@ -5,15 +5,19 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.example.android.ui.home.HomeFragment;
-import com.example.android.ui.slideshow.SlideshowFragment;
 import com.example.android.ui.tracker.PeriodTrackerFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
@@ -34,7 +38,7 @@ public class PatientHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_patient_home2);
+        setContentView(R.layout.activity_patient_home);
         home = new HomeFragment();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -95,7 +99,39 @@ public class PatientHomeActivity extends AppCompatActivity {
     }
 
     public void navigateToChatRoom(View view){
-        home.goToChatRoom(view);
+        TextView roomID = view.findViewById(R.id.roomID);
+        String chatRoomID = roomID.getText().toString();
+        findUserName(chatRoomID);
+    }
+
+    public void goToMeet(View view){
+        TextView linkTxt = view.findViewById(R.id.link);
+        //startmeet(linkTxt.getText().toString());
+    }
+
+    /*private void startmeet(String code){
+        JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder().setRoom(code).setWelcomePageEnabled(false).build();
+        JitsiMeetActivity.launch(PatientHomeActivity.this,options);
+    }*/
+
+    private void findUserName(String roomID) {
+        String currUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("patient").child(currUserId).child("info");
+        ref.child("name").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String username = snapshot.getValue(String.class);
+                Intent intent = new Intent(PatientHomeActivity.this, ChatActivity.class);
+                intent.putExtra("roomId",roomID);
+                intent.putExtra("currUserName",username);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 }

@@ -33,11 +33,8 @@ import static android.content.Context.MODE_PRIVATE;
 public class GalleryFragment extends Fragment {
 
     private GalleryViewModel galleryViewModel;
-    public int ActivityNumPat = 2;
-    public int ActivityNumDoc = 1;
     private SharedPreferences prefs;
     String currUserRole;
-    private BottomNavigationView bottomNavigationView;
     ArrayList<CallInfoModel> callInfos;
     ArrayList<String> callRoomIds;
     long numOfCalls;

@@ -131,8 +131,8 @@ public class CancerDetectActivity extends AppCompatActivity {
                             if (response.body() != null) {
                                 AuthResponseCancer authResponse = response.body();
                                 Toast.makeText(CancerDetectActivity.this, String.valueOf(authResponse.getBiopsy()),Toast.LENGTH_SHORT).show();
-                                results.setText("Hinselmann:"+authResponse.getHinselmann()+"\n Cytology:"+authResponse.getCytology()+"\n Schiller:"
-                                +authResponse.getSchiller()+"\n Biopsy:"+authResponse.getBiopsy());
+                                results.setText("Hinselmann:"+authResponse.hinsel()+"\n Cytology:"+authResponse.cytol()+"\n Schiller:"
+                                +authResponse.schill()+"\n Biopsy:"+authResponse.biopsyReq());
                             } else
                                 Toast.makeText(CancerDetectActivity.this, "Couldn't log you in. Please try again.",Toast.LENGTH_SHORT).show();
                         } else if(response.code() == 400){
