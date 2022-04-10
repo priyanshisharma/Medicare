@@ -77,7 +77,7 @@
             <div class="navbar-brand">
                 <span class="navbar-logo">
                     <a href="index.php">
-                        <img src="assets/images/aarogya_logo.png" alt="Mobirise" style="height: 5rem;">
+                        <img src="assets/images/gesvysly.png" alt="Mobirise" style="height: 5rem;">
                     </a>
                 </span>
             </div>
