@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Aarogya</string>
+    <string name="app_name">Medicare</string>
 
     <!--Login Screen-->
     <string name="email">Email</string>
