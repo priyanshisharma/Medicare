@@ -6,7 +6,8 @@ import retrofit2.http.POST;
 
 public interface APIServices {
 
-    @POST("cervicalcancer/")
-    Call<AuthResponseCancer> getCancerDetails(@Body CancerDetails details);
+    @POST("heart")
+    Call<AuthResponse> getHeartDetails(@Body HeartDetails details);
+
 
 }

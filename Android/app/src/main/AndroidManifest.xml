@@ -11,11 +11,13 @@
         android:roundIcon="@drawable/squarelogo"
         android:supportsRtl="true"
         android:theme="@style/Theme.Android">
-        <activity android:name=".CancerDetectActivity" />
-        <activity android:name=".CallsActivity"
-            android:theme="@style/Theme.Android.NoActionBar"/>
-        <activity android:name=".ChatListActivity"
-            android:theme="@style/Theme.Android.NoActionBar"/>
+        <activity android:name=".HeartDetectActivity"></activity>
+        <activity
+            android:name=".CallsActivity"
+            android:theme="@style/Theme.Android.NoActionBar" />
+        <activity
+            android:name=".ChatListActivity"
+            android:theme="@style/Theme.Android.NoActionBar" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".NewDoctorSearchActivity" />
         <activity

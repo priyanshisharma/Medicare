@@ -28,7 +28,7 @@ public class BottomNavigationHelperForDoctor {
                         break;
 
                     case R.id.tools:
-                        Intent intent = new Intent(context, CancerDetectActivity.class);
+                        Intent intent = new Intent(context, HeartDetectActivity.class);
                         context.startActivity(intent);
                         break;
 

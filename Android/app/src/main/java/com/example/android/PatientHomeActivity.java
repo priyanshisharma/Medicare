@@ -28,11 +28,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import org.jitsi.meet.sdk.JitsiMeetActivity;
+import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
+
 public class PatientHomeActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private HomeFragment home;
-    //private SlideshowFragment slide = new SlideshowFragment();
     private PeriodTrackerFragment period = new PeriodTrackerFragment();
 
     @Override
@@ -106,13 +108,13 @@ public class PatientHomeActivity extends AppCompatActivity {
 
     public void goToMeet(View view){
         TextView linkTxt = view.findViewById(R.id.link);
-        //startmeet(linkTxt.getText().toString());
+        startmeet(linkTxt.getText().toString());
     }
 
-    /*private void startmeet(String code){
+    private void startmeet(String code){
         JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder().setRoom(code).setWelcomePageEnabled(false).build();
         JitsiMeetActivity.launch(PatientHomeActivity.this,options);
-    }*/
+    }
 
     private void findUserName(String roomID) {
         String currUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();

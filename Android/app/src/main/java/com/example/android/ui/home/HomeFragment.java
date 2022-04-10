@@ -124,7 +124,7 @@ public class HomeFragment extends Fragment {
         chatList.setAdapter(adapter);
     }
 
-    public void goToChatRoom(View view) {
+    /*public void goToChatRoom(View view) {
         TextView roomID = view.findViewById(R.id.roomID);
         String chatRoomID = roomID.getText().toString();
         chatIDs = new ArrayList<>();
@@ -151,7 +151,7 @@ public class HomeFragment extends Fragment {
 
             }
         });
-    }
+    }*/
 
     public void resetArrays() {
         chatIDs = new ArrayList<>();

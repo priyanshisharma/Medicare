@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class AppClient {
 
     private static AppClient mInstance;
-    private String BASE_URL = "http://71ba-2401-4900-1f38-476d-fcb4-87f9-b99e-50c3.ngrok.io/";
+    private String BASE_URL = "https://heart-disease-techblitz.herokuapp.com/";
 
     private AppClient() {
     }
