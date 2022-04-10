@@ -89,9 +89,6 @@ Domain : Android Developer
 2. Priyanshi Sharma - 4th Year (Computer Science Engineering)  
 College : National Institute of Technology Raipur  
 Domain : AI Tools & Web Developer (Frontend)
-3. Anjali Patle - 4th Year (Computer Science Engineering)  
-College : National Institute of Technolgy Raipur  
-Domain : Web Developer (Frontend)
-4. Sakshi Bhandarkar - 4th Year (Computer Science Engineering)  
+3. Sakshi Bhandarkar - 4th Year (Computer Science Engineering)  
 College : National Institute of Technolgy Raipur  
 Domain : Web Developer (Backend)
